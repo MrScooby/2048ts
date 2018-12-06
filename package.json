@@ -1,0 +1,35 @@
+{
+  "name": "2048ts",
+  "version": "1.0.0",
+  "description": "Simple 2048 clone using typescript as main adn webpack to manage",
+  "scripts": {
+    "build:dev": "webpack --silent --no-pager --mode=development && echo === BUILD DONE ===",
+    "build:prod": "webpack --silent --no-pager --mode=production && echo === BUILD DONE ===",
+    "start": "webpack-dev-server --mode=development",
+    "log": "echo Commits from last 2 weeks && git --no-pager log --pretty=format:\"%x09%Cred%h%Creset - %Cgreen%ad%Creset - %Cblue%an%Creset - %s %C(auto)%d%Creset\" --after=\"2 week ago\" --date=format:\"%d.%m.%Y %H:%M\" --graph"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrScooby/2048ts.git"
+  },
+  "author": "Scooby",
+  "bugs": {
+    "url": "https://github.com/MrScooby/2048ts/issues"
+  },
+  "homepage": "https://github.com/MrScooby/2048ts#readme",
+  "devDependencies": {
+    "clean-webpack-plugin": "^1.0.0",
+    "css-loader": "^1.0.1",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.4.5",
+    "node-sass": "^4.10.0",
+    "path": "^0.12.7",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "ts-loader": "^5.3.1",
+    "typescript": "^3.2.1",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
+  }
+}

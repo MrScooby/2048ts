@@ -1,0 +1,116 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    color: rgba(79, 65, 53, 0.93);}
+
+.wrapper {
+    max-width: 600px;
+    margin: 0 auto;}
+
+.header {
+    margin-top: 20px;}
+    .header h1 {
+        font-size: 75px;
+        font-weight: bold;
+        display: block;}
+
+.game-container {
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+    padding: 15px;
+    width: 515px;
+    height: 515px;
+    background-color: #a3a3a3;}
+
+.board-container {
+    position: absolute;}
+
+.board-row {
+    margin-bottom: 15px;
+    padding: 0;
+    height: 110px;}
+    .board-row:last-child {
+        margin-bottom: 0;}
+
+.board-cell {
+    display: inline-block;
+    width: 110px;
+    height: 110px;
+    margin-right: 15px;
+    border-radius: 10px;
+    background-color: #bfbfbf;}
+    .board-cell:last-child {
+        margin-right: 0;}
+
+.tile-container {
+    position: absolute;}
+
+.tile {
+    position: absolute;
+    transition: 150ms;
+    width: 110px;
+    height: 110px;
+    border-radius: 10px;
+    line-height: 110px;
+    font-size: 60px;
+    font-weight: bold;
+    text-align: center;}
+    .tile.tile-2 {
+        background-color: #fff1d0;}
+    .tile.tile-4 {
+        background-color: #f6c383;}
+    .tile.tile-8 {
+        background-color: #cda168;}
+    .tile.tile-16 {
+        background-color: #b48661;}
+    .tile.tile-32 {
+        background-color: #9b6d4e;}
+    .tile.tile-64 {
+        background-color: #815741;}
+    .tile.tile-128 {
+        background-color: #7f3327;}
+    .tile.tile-256 {
+        background-color: #954b3f;}
+    .tile.tile-512 {
+        background-color: #914720;}
+    .tile.tile-1024 {
+        font-size: 40px;
+        background-color: #b43d00;}
+    .tile.tile-2048 {
+        font-size: 40px;
+        background-color: #e90004;}
+
+.tile-position-1-1 {
+    transform: translate(0px, 0px);}
+.tile-position-1-2 {
+    transform: translate(125px, 0px);}
+.tile-position-1-3 {
+    transform: translate(250px, 0px);}
+.tile-position-1-4 {
+    transform: translate(375px, 0px);}
+.tile-position-2-1 {
+    transform: translate(0px, 125px);}
+.tile-position-2-2 {
+    transform: translate(125px, 125px);}
+.tile-position-2-3 {
+    transform: translate(250px, 125px);}
+.tile-position-2-4 {
+    transform: translate(375px, 125px);}
+.tile-position-3-1 {
+    transform: translate(0px, 250px);}
+.tile-position-3-2 {
+    transform: translate(125px, 250px);}
+.tile-position-3-3 {
+    transform: translate(250px, 250px);}
+.tile-position-3-4 {
+    transform: translate(375px, 250px);}
+.tile-position-4-1 {
+    transform: translate(0px, 375px);}
+.tile-position-4-2 {
+    transform: translate(125px, 375px);}
+.tile-position-4-3 {
+    transform: translate(250px, 375px);}
+.tile-position-4-4 {
+    transform: translate(375px, 375px);}
