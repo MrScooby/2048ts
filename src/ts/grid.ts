@@ -1,7 +1,9 @@
+import Tile from './tile';
+import GridLocation from './gridLocation';
 
 export default class Grid {
 
-    protected cellsGrid: number[][];
+    public cellsGrid: Tile[][];
 
     constructor(
         protected gridSize?: number,
@@ -12,7 +14,6 @@ export default class Grid {
         this.setupstartTilesNumber();
 
         this.cellsGrid = this.setupCellsGrid();
-
     }
 
     protected setupGridSize() {
@@ -31,24 +32,55 @@ export default class Grid {
         console.log('!!!!!!! - startTilesNumber not provided: set to 2 as default!');
     }
 
-    protected setupCellsGrid() {
-        let cellsGrid: number[][] = [];
-        for (let i = 0; i < this.gridSize; i++) {
-            cellsGrid[i] = [];
-            for (let a = 0; a < this.gridSize; a++) {
-                cellsGrid[i].push(null);
+    protected setupCellsGrid(): Tile[][] {
+        let cellsGrid: Tile[][] = [];
+
+        for (let x = 0; x < this.gridSize; x++) {
+            cellsGrid[x] = [];
+            for (let y = 0; y < this.gridSize; y++) {
+                cellsGrid[x].push(null);
             }
         }
+
         return cellsGrid;
     }
 
-    public addStartTiles(startTilesNumber: number) {
-        for (let i = 0; i < startTilesNumber; i++) {
-            this.addRandomTile();
+    public addStartTiles() {
+        for (let i = 0; i < this.startTilesNumber; i++) {
+            this.createRandomTile(2);
         }
     }
 
-    protected addRandomTile() {
-        let emptyCells;
+    protected createRandomTile(value: number): Tile {
+        let emptyCells: GridLocation[] = this.emptyCells();
+        let randCellNumber: number = Math.floor(Math.random() * emptyCells.length);
+
+        let tilePosition: GridLocation = emptyCells[randCellNumber];
+
+        let newTile: Tile = new Tile(tilePosition, value);
+
+        this.cellsGrid[tilePosition.row][tilePosition.column] = newTile;
+
+
+        return newTile;
     }
+
+    protected emptyCells(): GridLocation[] {
+        let emptyCells: GridLocation[] = [];
+
+        for (let x = 0; x < this.gridSize; x++) {
+            for (let y = 0; y < this.gridSize; y++) {
+                if (this.isCellEmpty(this.cellsGrid[x][y])) emptyCells.push({ row: y, column: x });
+            }
+        }
+
+        return emptyCells;
+    }
+
+    protected isCellEmpty(cellValue: Tile): boolean {
+        return cellValue == null ? true : false;
+    }
+
+
+
 }

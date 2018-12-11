@@ -49,11 +49,11 @@ let prodConfig = {
   plugins: plugins('[hash:6].'),
 }
 
-function modules() {
+function modules(hash) {
   return {
     rules: [
       {
-        test: /\.css$/,
+        test: /\.(css|scss)$/,
         exclude: /node_modules/,
         use: [
           'style-loader',
@@ -63,10 +63,17 @@ function modules() {
         ],
       },
       {
-        test: /\.ts$/,
+        test: /\.tsx?$/,
         exclude: /node_modules/,
         loader: 'ts-loader'
       },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        loader: 'file-loader',
+        options: {
+          name: 'media/[name]' + hash + '.[ext]'
+        }
+      }
     ]
   };
 }
