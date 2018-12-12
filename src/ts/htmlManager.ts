@@ -18,7 +18,7 @@ export default class HTMLManager {
         for (let x = 0; x < cellsGrid.length; x++) {
             for (let y = 0; y < cellsGrid.length; y++) {
                 if (cellsGrid[y][x] !== null) {
-                    let tile: Tile = new Tile({row: y, column: x}, cellsGrid[y][x].value);
+                    let tile: Tile = new Tile({ row: y, column: x }, cellsGrid[y][x].value);
                     this.showTile(tile);
                 }
             }
@@ -39,7 +39,7 @@ export default class HTMLManager {
         this.tileContainer.appendChild(div);
         div.classList.add(valueClass, positionClass);
 
-        setTimeout(function() {
+        setTimeout(function () {
             div.classList.add("tile");
             div.innerText = tile.value.toString();
         }, 100);

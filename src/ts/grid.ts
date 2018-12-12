@@ -61,7 +61,6 @@ export default class Grid {
 
         this.cellsGrid[tilePosition.row][tilePosition.column] = newTile;
 
-
         return newTile;
     }
 
@@ -70,17 +69,28 @@ export default class Grid {
 
         for (let x = 0; x < this.gridSize; x++) {
             for (let y = 0; y < this.gridSize; y++) {
-                if (this.isCellEmpty(this.cellsGrid[x][y])) emptyCells.push({ row: y, column: x });
+                if (this.isCellEmpty({row: x, column: y})) emptyCells.push({ row: y, column: x });
             }
         }
 
         return emptyCells;
     }
 
-    protected isCellEmpty(cellValue: Tile): boolean {
-        return cellValue == null ? true : false;
+    public isCellEmpty(cellPosition: GridLocation): boolean {
+        return this.getCellTile(cellPosition) == null ? true : false;
     }
 
+    public getCellTile(cellPosition: GridLocation):Tile {
+        return this.cellsGrid[cellPosition.row][cellPosition.column];
+    }
 
+    public isWithinGrid(position: GridLocation): boolean {
+
+        if (position.row < 0 || position.row >= this.gridSize ||
+            position.column < 0 || position.column >= this.gridSize)
+            return false;
+
+        return true;
+    }
 
 }
