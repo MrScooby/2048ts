@@ -1,5 +1,5 @@
 # Maciej Kubiczek
-# SpaceElephant
-# 12.2018
+SpaceElephant
+12.2018
 
-Simple 2048 clone using typescript as main adn webpack to manage
+Simple 2048 clone using typescript and webpack.
