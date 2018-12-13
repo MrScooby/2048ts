@@ -1,18 +1,28 @@
-import GridLocation from './gridLocation';
+import { LocationOnGrid } from './LocationOnGrid';
 
-export default class Tile {
+export class Tile {
 
-    public position: GridLocation;
+    public position: LocationOnGrid;
     public value: number;
+    public movedInThisRound: boolean;
 
     constructor(
-        position: GridLocation,
+        position: LocationOnGrid,
         value: number
     ) {
 
         this.position = position;
         this.value = value;
+        this.movedInThisRound = false;
 
+    }
+
+    public updateTilePosition(targetPosition: LocationOnGrid) {
+        this.position = targetPosition;
+    }
+
+    public updateValue() {
+        this.value += this.value;
     }
 
 }

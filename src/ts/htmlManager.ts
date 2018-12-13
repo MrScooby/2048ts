@@ -1,8 +1,7 @@
-import Tile from './tile';
-import GridLocation from './gridLocation';
+import { Tile } from "./tile";
+import { LocationOnGrid } from "./LocationOnGrid";
 
-
-export default class HTMLManager {
+export class HTMLManager {
 
     protected tileContainer: HTMLElement;
 
@@ -18,7 +17,7 @@ export default class HTMLManager {
         for (let x = 0; x < cellsGrid.length; x++) {
             for (let y = 0; y < cellsGrid.length; y++) {
                 if (cellsGrid[y][x] !== null) {
-                    let tile: Tile = new Tile({ row: y, column: x }, cellsGrid[y][x].value);
+                    let tile = new Tile({ row: y, column: x }, cellsGrid[y][x].value);
                     this.showTile(tile);
                 }
             }
@@ -34,7 +33,7 @@ export default class HTMLManager {
     public showTile(tile: Tile) {
         let div = document.createElement('div');
         let valueClass = 'tile-' + tile.value;
-        let positionClass = 'tile-position-' + tile.position.row + '-' + tile.position.column;
+        let positionClass = this.tilePositionClass(tile.position);
 
         this.tileContainer.appendChild(div);
         div.classList.add(valueClass, positionClass);
@@ -44,4 +43,39 @@ export default class HTMLManager {
             div.innerText = tile.value.toString();
         }, 100);
     }
+
+    protected tilePositionClass(position: LocationOnGrid): string {
+        return 'tile-position-' + position.row + '-' + position.column;
+    }
+
+    protected tilwValueClass(value: number): string {
+        return 'tile-' + value;
+    }
+
+    public moveTile(currentPosition: LocationOnGrid, targetPosition: LocationOnGrid) {
+        let tile = this.tileHTMLelement(currentPosition);
+        tile[0].classList.add(this.tilePositionClass(targetPosition));
+        tile[0].classList.remove(this.tilePositionClass(currentPosition));
+    }
+
+    protected tileHTMLelement(position: LocationOnGrid): HTMLCollection {
+        let tilePositionClass = this.tilePositionClass(position);
+        return document.getElementsByClassName(tilePositionClass);
+    }
+
+    public deleteTile(tilePosition: LocationOnGrid) {
+        let tile = this.tileHTMLelement(tilePosition);
+        this.tileContainer.removeChild(tile[0]);
+    }
+
+    public updateTileValue(tilePosition: LocationOnGrid, value: number) {
+        let tile = this.tileHTMLelement(tilePosition);
+        let newValue = value * 2;
+        let valueClass = this.tilwValueClass(value);
+        tile[0].classList.remove(valueClass);
+        valueClass = this.tilwValueClass(newValue);
+        tile[0].classList.add(valueClass);
+        tile[0].innerHTML = newValue.toString();
+    }
+
 }

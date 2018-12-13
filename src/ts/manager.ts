@@ -1,7 +1,12 @@
-import HTMLManager from './htmlManager';
-import Grid from './grid';
-import GridLocation from './gridLocation';
-import Tile from './tile';
+import { HTMLManager } from './htmlManager';
+import { Grid } from './grid';
+import { LocationOnGrid } from './LocationOnGrid';
+import { Tile } from './tile';
+
+
+/////////////////////////////
+// default exports to be gone !
+/////////////////////////////
 
 interface vector {
     x: number,
@@ -16,7 +21,7 @@ export default class Manager {
     protected grid: Grid;
 
     constructor(
-
+        // ...
     ) {
 
         this.htmlManager = new HTMLManager();
@@ -47,19 +52,20 @@ export default class Manager {
 
             if (direction) {
                 event.preventDefault();
-                self.moveTiles(direction);
+                self.moveAllTiles(direction);
             }
         })
     }
 
-    protected moveTiles(direction: string) {
+    protected moveAllTiles(direction: string) {
         let directionVector: vector = this.directionVectorMap[direction];
         let movingOrder: { x: number[], y: number[] } = this.movingOrder(directionVector);
-        let tilesMoved: boolean = false;
+        let tilesMoved = false;
 
         movingOrder.x.forEach(row => {
             movingOrder.y.forEach(column => {
-                let movingTile = this.grid.cellsGrid[row][column];
+                let cellPosition: LocationOnGrid = { row: row, column: column };
+                let movingTile = this.grid.cellContent(cellPosition);
 
                 if (movingTile !== null) {
                     let targetPosition = this.getTargetPosition(movingTile.position, directionVector);
@@ -67,16 +73,27 @@ export default class Manager {
                     let furthestEmptyCellPosition = targetPosition.furthestEmptyCell;
 
                     if (this.isMergePossible(potentialMergePosition, movingTile)) {
-                        // to do
+                        this.moveTile(cellPosition, potentialMergePosition, movingTile);
+                        this.htmlManager.deleteTile(potentialMergePosition);
+                        this.htmlManager.updateTileValue(potentialMergePosition, movingTile.value);
+                        movingTile.updateValue();
+                        movingTile.movedInThisRound = true;
+                        tilesMoved = true;
+                    } else if (!this.isTheSame(cellPosition, furthestEmptyCellPosition)){
+                        this.moveTile(cellPosition, furthestEmptyCellPosition, movingTile);
+                        tilesMoved = true;
                     }
-
-                    if(this.grid.isWithinGrid(potentialMergePosition) && !this.grid.isCellEmpty(potentialMergePosition)) {
-                        console.log('MERGE!!!!!!1!');
-                    }
-                    console.log('move to ' + furthestEmptyCellPosition.row + '  ' + furthestEmptyCellPosition.column);
                 }
             });
         })
+
+        if (tilesMoved) {
+            this.addNewTile();
+        } else if (this.isGameOver) {
+
+        }
+
+        this.grid.resetMovementFlagOnTiles();
 
     }
 
@@ -102,11 +119,11 @@ export default class Manager {
         return { x: rowMovingOrder, y: columnMovingOrder };
     }
 
-    protected getTargetPosition(cellPosition: GridLocation, directionVector: vector): {
-        furthestEmptyCell: GridLocation,
-        blockedCell: GridLocation
+    protected getTargetPosition(cellPosition: LocationOnGrid, directionVector: vector): {
+        furthestEmptyCell: LocationOnGrid,
+        blockedCell: LocationOnGrid
     } {
-        let previousPosition: GridLocation;
+        let previousPosition: LocationOnGrid;
 
         do {
             previousPosition = cellPosition;
@@ -122,12 +139,40 @@ export default class Manager {
         }
     }
 
-    protected isMergePossible(targetPosition: GridLocation, currentTile: Tile):boolean {
-        // to do
-        return
+    protected isMergePossible(targetPosition: LocationOnGrid, currentTile: Tile): boolean {
+        if (!this.grid.isWithinGrid(targetPosition) || this.grid.isCellEmpty(targetPosition)) return false;
+
+        let targetTile = this.grid.cellContent(targetPosition);
+
+        if (currentTile.value !== targetTile.value || targetTile.movedInThisRound) return false;
+
+        return true;
     }
 
-    protected checkIfMergePossible(potentialMergePosition: GridLocation, currentTile: Tile) {
-
+    protected isTheSame(startingPosition: LocationOnGrid, targetPosition: LocationOnGrid): boolean {
+        if ((startingPosition.row == targetPosition.row) &&
+            (startingPosition.column == targetPosition.column)) return true;
+        return false;
     }
+
+    protected moveTile(startingPosition: LocationOnGrid, targetPosition: LocationOnGrid, tile: Tile) {
+        this.grid.moveCell(startingPosition, targetPosition);
+        tile.updateTilePosition(targetPosition);
+        this.htmlManager.moveTile(startingPosition, targetPosition);
+    }
+
+    protected addNewTile() {
+        let newTile = this.grid.addRandomTile(2);
+        this.htmlManager.showTile(newTile);
+    }
+
+    protected isGameOver(): boolean {
+
+        if (this.grid.isThereEmptySpace) return false;
+
+
+
+        return true;
+    }
+
 }

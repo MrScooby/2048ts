@@ -1,7 +1,8 @@
-import Tile from './tile';
-import GridLocation from './gridLocation';
+import { Tile } from './tile';
+import { LocationOnGrid } from './LocationOnGrid';
 
-export default class Grid {
+
+export class Grid {
 
     public cellsGrid: Tile[][];
 
@@ -47,50 +48,75 @@ export default class Grid {
 
     public addStartTiles() {
         for (let i = 0; i < this.startTilesNumber; i++) {
-            this.createRandomTile(2);
+            this.addRandomTile(2);
         }
     }
 
-    protected createRandomTile(value: number): Tile {
-        let emptyCells: GridLocation[] = this.emptyCells();
-        let randCellNumber: number = Math.floor(Math.random() * emptyCells.length);
+    public addRandomTile(value: number): Tile {
+        let emptyCells: LocationOnGrid[] = this.emptyCells();
+        let randCellNumber = Math.floor(Math.random() * emptyCells.length);
 
-        let tilePosition: GridLocation = emptyCells[randCellNumber];
+        let tilePosition = emptyCells[randCellNumber];
 
-        let newTile: Tile = new Tile(tilePosition, value);
+        let newTile = new Tile(tilePosition, value);
 
         this.cellsGrid[tilePosition.row][tilePosition.column] = newTile;
 
         return newTile;
     }
 
-    protected emptyCells(): GridLocation[] {
-        let emptyCells: GridLocation[] = [];
+    protected emptyCells(): LocationOnGrid[] {
+        let emptyCells: LocationOnGrid[] = [];
 
         for (let x = 0; x < this.gridSize; x++) {
             for (let y = 0; y < this.gridSize; y++) {
-                if (this.isCellEmpty({row: x, column: y})) emptyCells.push({ row: y, column: x });
+                if (this.isCellEmpty({ row: x, column: y })) emptyCells.push({ row: x, column: y });
             }
         }
 
         return emptyCells;
     }
 
-    public isCellEmpty(cellPosition: GridLocation): boolean {
+    public isCellEmpty(cellPosition: LocationOnGrid): boolean {
         return this.getCellTile(cellPosition) == null ? true : false;
     }
 
-    public getCellTile(cellPosition: GridLocation):Tile {
+    public getCellTile(cellPosition: LocationOnGrid): Tile {
         return this.cellsGrid[cellPosition.row][cellPosition.column];
     }
 
-    public isWithinGrid(position: GridLocation): boolean {
+    public isWithinGrid(position: LocationOnGrid): boolean {
 
         if (position.row < 0 || position.row >= this.gridSize ||
             position.column < 0 || position.column >= this.gridSize)
             return false;
 
         return true;
+    }
+
+    public cellContent(cellPosition: LocationOnGrid): Tile {
+        return this.cellsGrid[cellPosition.row][cellPosition.column];
+    }
+
+    public moveCell(startingPosition: LocationOnGrid, targetPosition: LocationOnGrid) {
+        this.cellsGrid[targetPosition.row][targetPosition.column] = this.cellsGrid[startingPosition.row][startingPosition.column];
+        this.cellsGrid[startingPosition.row][startingPosition.column] = null;
+    }
+
+    public isThereEmptySpace(): boolean {
+        if (this.emptyCells.length) return false;
+        return true;
+    }
+
+    public resetMovementFlagOnTiles() {
+        for (let x = 0; x < this.gridSize; x++) {
+            for (let y = 0; y < this.gridSize; y++) {
+                if (!this.isCellEmpty({ row: x, column: y })) {
+                    let tile = this.cellContent({ row: x, column: y });
+                    tile.movedInThisRound = false;
+                }
+            }
+        }
     }
 
 }
