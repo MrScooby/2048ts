@@ -1,0 +1,9 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    color: rgba(79, 65, 53, 0.93);}
+
+.wrapper {
+    max-width: 600px;
+    margin: 0 auto;}

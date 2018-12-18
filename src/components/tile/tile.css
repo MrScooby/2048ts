@@ -1,51 +1,12 @@
-body {
-    font-family: sans-serif;
-    margin: 0;
-    padding: 0;
-    color: rgba(79, 65, 53, 0.93);}
+.tile-container {
+    position: absolute;
 
-.wrapper {
-    max-width: 600px;
-    margin: 0 auto;}
-
-.header {
-    margin-top: 20px;}
-    .header h1 {
-        font-size: 75px;
-        font-weight: bold;
-        display: block;}
-
-.game-container {
     margin-left: auto;
     margin-right: auto;
     border-radius: 20px;
     padding: 15px;
     width: 515px;
-    height: 515px;
-    background-color: #a3a3a3;}
-
-.board-container {
-    position: absolute;}
-
-.board-row {
-    margin-bottom: 15px;
-    padding: 0;
-    height: 110px;}
-    .board-row:last-child {
-        margin-bottom: 0;}
-
-.board-cell {
-    display: inline-block;
-    width: 110px;
-    height: 110px;
-    margin-right: 15px;
-    border-radius: 10px;
-    background-color: #bfbfbf;}
-    .board-cell:last-child {
-        margin-right: 0;}
-
-.tile-container {
-    position: absolute;}
+    height: 515px;}
 
 .tile {
     position: absolute;

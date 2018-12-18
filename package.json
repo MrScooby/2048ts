@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/MrScooby/2048ts#readme",
   "devDependencies": {
+    "@types/react": "^16.7.17",
+    "@types/react-dom": "^16.0.11",
     "clean-webpack-plugin": "^1.0.0",
     "css-loader": "^1.0.1",
     "file-loader": "^2.0.0",
@@ -25,6 +27,8 @@
     "mini-css-extract-plugin": "^0.4.5",
     "node-sass": "^4.10.0",
     "path": "^0.12.7",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "ts-loader": "^5.3.1",
@@ -32,5 +36,6 @@
     "webpack": "^4.27.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10"
-  }
+  },
+  "dependencies": {}
 }

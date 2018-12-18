@@ -1,7 +1,6 @@
 import { Tile } from './tile';
 import { LocationOnGrid } from './LocationOnGrid';
 
-
 export class Grid {
 
     public cellsGrid: Tile[][];

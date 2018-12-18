@@ -3,11 +3,6 @@ import { Grid } from './grid';
 import { LocationOnGrid } from './LocationOnGrid';
 import { Tile } from './tile';
 
-
-/////////////////////////////
-// default exports to be gone !
-/////////////////////////////
-
 interface vector {
     x: number,
     y: number
@@ -94,7 +89,6 @@ export class Manager {
         }
 
         this.grid.resetMovementFlagOnTiles();
-
     }
 
     protected readonly directionVectorMap = {

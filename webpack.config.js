@@ -19,14 +19,14 @@ module.exports = (env, arg) => {
 let devConfig = {
   mode: 'development',
   resolve: {
-    extensions: ['.js', '.ts', '.css']
+    extensions: ['.js', '.ts', '.css', '.tsx']
   },
   devtool: 'inline-source-map',
   devServer: {
     contentBase: './dist'
   },
   entry: {
-    main: APP_DIR + 'main.ts'
+    main: APP_DIR + 'main.tsx'
   },
   output: {
     path: path.resolve(BUILD_DIR),
@@ -39,10 +39,10 @@ let devConfig = {
 let prodConfig = {
   mode: 'production',
   resolve: {
-    extensions: ['.js', '.ts', '.css']
+    extensions: ['.js', '.ts', '.css', '.tsx']
   },
   entry: {
-    main: APP_DIR + 'main.ts'
+    main: APP_DIR + 'main.tsx'
   },
   output: {
     path: path.resolve(BUILD_DIR),
@@ -50,6 +50,10 @@ let prodConfig = {
   },
   module: modules('[hash:6].'),
   plugins: plugins('[hash:6].'),
+  externals: {
+    "react": "React",
+    "react-dom": "ReactDOM"
+  }
 }
 
 function modules(hash) {
@@ -66,7 +70,7 @@ function modules(hash) {
         ],
       },
       {
-        test: /\.tsx?$/,
+        test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
         loader: 'ts-loader'
       },
