@@ -18,19 +18,21 @@ export class Grid {
     }
 
     protected setupGridSize() {
-        if (this.gridSize) {
-            return;
-        }
+        if (this.gridSize) return;
         this.gridSize = 4;
-        console.log('!!!!!!! - gridSize not provided: set to 4 as default!');
+        console.error('gridSize not provided: set to 4 as default!');
     }
 
     protected setupstartTilesNumber() {
+
         if (this.startTilesNumber) {
+            if (this.startTilesNumber > this.gridSize * this.gridSize)
+                throw new Error(`Start tiles number to big for ${this.gridSize}X${this.gridSize} grid!`);
             return;
         }
+
         this.startTilesNumber = 2;
-        console.log('!!!!!!! - startTilesNumber not provided: set to 2 as default!');
+        console.error('startTilesNumber not provided: set to 2 as default!');
     }
 
     protected setupCellsGrid(): Tile[][] {
@@ -109,6 +111,7 @@ export class Grid {
     }
 
     public resetMovementFlagOnTiles() {
+
         for (let x = 0; x < this.gridSize; x++) {
             for (let y = 0; y < this.gridSize; y++) {
                 if (!this.isCellEmpty({ row: x, column: y })) {
@@ -117,6 +120,22 @@ export class Grid {
                 }
             }
         }
+
     }
+
+    public isMovePossible(): boolean {
+
+        for (let x = 0; x < this.gridSize; x++) {
+            for (let y = 0; y < this.gridSize; y++) {
+                if (this.cellsGrid[x + 1][y])
+                    if (this.cellsGrid[x][y].value == this.cellsGrid[x + 1][y].value) return true;
+                if (this.cellsGrid[x][y + 1])
+                    if (this.cellsGrid[x][y].value == this.cellsGrid[x][y + 1].value) return true;
+            }
+        }
+
+        return false;
+    }
+
 
 }

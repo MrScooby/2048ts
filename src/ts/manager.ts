@@ -13,7 +13,7 @@ interface vector {
     y: number
 }
 
-export default class Manager {
+export class Manager {
 
     protected gridSize: number = 4;
     protected startTilesNumber: number = 2;
@@ -162,16 +162,13 @@ export default class Manager {
     }
 
     protected addNewTile() {
-        let newTile = this.grid.addRandomTile(2);
+        let rand = Math.random();
+        let newTile = rand > 0.8 ? this.grid.addRandomTile(4) : this.grid.addRandomTile(2);
         this.htmlManager.showTile(newTile);
     }
 
     protected isGameOver(): boolean {
-
-        if (this.grid.isThereEmptySpace) return false;
-
-
-
+        if (this.grid.isThereEmptySpace || this.grid.isMovePossible) return false;
         return true;
     }
 

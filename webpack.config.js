@@ -38,8 +38,11 @@ let devConfig = {
 
 let prodConfig = {
   mode: 'production',
+  resolve: {
+    extensions: ['.js', '.ts', '.css']
+  },
   entry: {
-    main: APP_DIR + 'main.js'
+    main: APP_DIR + 'main.ts'
   },
   output: {
     path: path.resolve(BUILD_DIR),
@@ -71,7 +74,7 @@ function modules(hash) {
         test: /\.(png|svg|jpg|gif)$/,
         loader: 'file-loader',
         options: {
-          name: 'media/[name]' + hash + '.[ext]'
+          name: 'media/[name].' + hash + '[ext]'
         }
       }
     ]
