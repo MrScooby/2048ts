@@ -19,7 +19,7 @@ module.exports = (env, arg) => {
 let devConfig = {
   mode: 'development',
   resolve: {
-    extensions: ['.js', '.ts', '.css', '.tsx']
+    extensions: ['.js', '.ts', '.tsx']
   },
   devtool: 'inline-source-map',
   devServer: {
@@ -39,7 +39,7 @@ let devConfig = {
 let prodConfig = {
   mode: 'production',
   resolve: {
-    extensions: ['.js', '.ts', '.css', '.tsx']
+    extensions: ['.js', '.ts', '.tsx']
   },
   entry: {
     main: APP_DIR + 'main.tsx'
@@ -93,7 +93,7 @@ function plugins(hash) {
     new HtmlWebpackPlugin({
       inject: false,
       template: APP_DIR + 'indexTemplate.html',
-      filename: 'index.' + hash + 'html'
+      filename: 'index.html'
     }),
     new CleanWebpackPlugin('dist/*', {
     })

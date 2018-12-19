@@ -1,4 +1,4 @@
-import './main';
+import './main.css';
 import { Manager } from './ts/manager';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
