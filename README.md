@@ -10,12 +10,13 @@ Based on [2048](https://play2048.co/) game made by Gabriele Cirulli.
 
 Build with:
 - Typescript
-- Node.js
 - Webpack
 - NPM Scripts
 - Bootstrap
 - React (but not really.. just to try it out)
 
 To do:
+- make react actually useful
 - points counter
 - cookies (your best score)
+- Sass/Less
