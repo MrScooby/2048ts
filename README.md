@@ -1,3 +1,4 @@
+# 2048ts
 # Maciej Kubiczek
 SpaceElephant
 12.2018 (work in progress)
@@ -20,3 +21,4 @@ To do:
 - points counter
 - cookies (your best score)
 - Sass/Less
+- RWD

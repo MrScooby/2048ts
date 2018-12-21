@@ -1,7 +1,7 @@
 import * as React from "react";
 import { HeaderContainer } from "./header/header-container";
 import { BoardContainer } from "./board/board-container";
-import { TileContainer } from "./tile/tile-container";
+import { TileContainerContainer } from "./tileContainer/tileContainer-container";
 
 
 export const App = () => {
@@ -9,7 +9,7 @@ export const App = () => {
     <div className="container-fluid">
       <HeaderContainer />
       <BoardContainer />
-      <TileContainer />
+      <TileContainerContainer />
     </div>
   );
 };

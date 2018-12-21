@@ -1,7 +1,7 @@
 import * as React from 'react';
-import './tile.css';
+import './tileContainer.css';
 
-export class Tile extends React.Component {
+export class TileContainer extends React.Component {
     render() {
         return (
             <div className="tile-container">

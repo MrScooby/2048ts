@@ -48,6 +48,7 @@ export class Manager {
             if (direction) {
                 event.preventDefault();
                 self.moveAllTiles(direction);
+
             }
         })
     }
