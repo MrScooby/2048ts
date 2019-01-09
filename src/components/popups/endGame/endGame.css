@@ -1,0 +1,19 @@
+.endGamePopup {
+    display: none;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+    padding: 15px;
+    width: 515px;
+    height: 515px;
+    background: rgba(218, 178, 138, 0.75);
+    text-align: center;
+    animation: fade-in 800ms ease 1200ms;
+    text-align: center;
+}
+
+.endGamePopup p {
+    font-size: 60px;
+    font-weight: bold;
+}

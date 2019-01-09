@@ -86,7 +86,7 @@ export class Manager {
         if (tilesMoved) {
             this.addNewTile();
         } else if (this.isGameOver) {
-
+            // todo: game over
         }
 
         this.grid.resetMovementFlagOnTiles();

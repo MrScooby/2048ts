@@ -2,6 +2,7 @@ import * as React from "react";
 import { HeaderContainer } from "./header/header-container";
 import { BoardContainer } from "./board/board-container";
 import { TileContainerContainer } from "./tileContainer/tileContainer-container";
+import { EndGamePopupContainer } from "./popups/endGame/endGame-container";
 
 export const App = () => {
   return (
@@ -9,6 +10,7 @@ export const App = () => {
       <HeaderContainer />
       <BoardContainer />
       <TileContainerContainer />
+      <EndGamePopupContainer />
     </div>
   );
 };

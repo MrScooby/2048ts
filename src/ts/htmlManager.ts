@@ -6,7 +6,7 @@ export class HTMLManager {
     protected tileContainer: HTMLElement;
 
     constructor(
-
+        // ...
     ) {
         this.tileContainer = document.querySelector('.tile-container')
     }
