@@ -14,6 +14,6 @@ ReactDOM.render(<App />, wrapper);
 window.addEventListener('load', () => {
     (function () {
         console.log('frontend loaded');
-        let manager = new Manager();
+        // let manager = new Manager();
     })();
 });

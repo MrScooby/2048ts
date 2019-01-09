@@ -1,17 +1,18 @@
 import * as React from 'react';
 import './board.css';
+import { BoardProps } from './boardTypes'
 
-export class Board extends React.Component {
+export class Board extends React.Component<BoardProps> {
 
-    createBoard = () => {
+    createBoard = (size: number): HTMLDivElement[][] => {
         let board = [];
 
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < size; i++) {
             let row = [];
 
-            for (let a = 0; a < 4; a++) {
+            for (let a = 0; a < size; a++) {
                 row.push(
-                    <div className="board-cell" key={i+a}></div>
+                    <div className="board-cell" key={i + a}></div>
                 );
             }
             board.push(
@@ -26,8 +27,9 @@ export class Board extends React.Component {
     render() {
         return (
             <div className="board-container">
-                {this.createBoard()}
+                {this.createBoard(this.props.gridSize)}
             </div>
-        );
+        )
     }
+
 }
