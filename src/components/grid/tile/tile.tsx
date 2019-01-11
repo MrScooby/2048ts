@@ -1,30 +1,27 @@
 import * as React from 'react';
-import { TileProps } from './tileTypes'
+import { TileProps, LocationOnGrid } from './tileTypes'
 import './tile.css';
 
 export class Tile extends React.Component<TileProps> {
 
-    // protected tile: HTMLDivElement = document.createElement('div');
-    protected positionClass: string = 'tile-position-&{this.props.value}';
+    protected tilePositionClass(position: LocationOnGrid): string {
+        return 'tile-position-' + position.row + '-' + position.column;
+    }
 
-    constructor(props) {
-        super(props);
-
-        // this.tile.innerText = (this.props.value as any);
-        let positionClass = 'tile-position-&{this.props.value}'
-
-
+    protected tilwValueClass(value: number): string {
+        return 'tile-' + value;
     }
 
     render() {
         return (
-            <div className={this.positionClass} >
+            <div className={
+                'tile ' +
+                this.tilePositionClass(this.props.position) + ' ' +
+                this.tilwValueClass(this.props.value)
+            } >
                 {this.props.value}
             </div>
-
         );
     }
-
-
 
 }

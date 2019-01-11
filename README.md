@@ -14,10 +14,9 @@ Build with:
 - Webpack
 - NPM Scripts
 - Bootstrap
-- React (but not really.. just to try it out)
+- React (still working on this one)
 
 To do:
-- make react actually useful
 - points counter
 - cookies (your best score)
 - Sass/Less

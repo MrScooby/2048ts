@@ -7,13 +7,16 @@ import { Grid } from './grid/grid';
 
 export const App = () => {
 
+  const gridSize: number = 4;
+  const startTilesNumber: number = 2;
+
   let boardProps: BoardProps = {
-    gridSize: 4,
+    gridSize: gridSize,
   }
 
   let gridProps: GridProps = {
-    gridSize: 4,
-    startTilesNumber: 2,
+    gridSize: gridSize,
+    startTilesNumber: startTilesNumber,
   }
 
   return (

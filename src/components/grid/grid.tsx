@@ -1,18 +1,62 @@
 import * as React from 'react';
-import { GridProps } from './gridTypes';
+import { GridProps, GridState } from './gridTypes';
 import { TileProps, LocationOnGrid } from './tile/tileTypes'
 import './grid.css';
 import { Tile } from './tile/tile'
 
-export class Grid extends React.Component<GridProps> {
+export class Grid extends React.Component<GridProps, GridState> {
 
-    protected cellsGrid: React.ReactChild[][];
+    // protected cellsGrid: React.ReactChild[][];
 
     constructor(props) {
         super(props);
 
-        this.cellsGrid = this.initCellsGrid();
+        this.state = {
+            grid: this.initCellsGrid(),
+        }
+        //
+        this.initListener();
+
+        // this.cellsGrid = this.initCellsGrid();
         this.addStartTiles();
+        console.log(this.state.grid);
+
+    }
+
+    protected initListener() {
+
+        enum keyToDirectionMap {
+            ArrowLeft = 'left',
+            ArrowUp = 'up',
+            ArrowRight = 'right',
+            ArrowDown = 'down',
+            a = 'left',
+            w = 'up',
+            d = 'right',
+            s = 'down'
+        }
+        let self = this;
+
+        document.addEventListener('keydown', function (event) {
+            let direction: string = keyToDirectionMap[event.key];
+
+            let asd = self.state.grid;
+            if (direction) {
+                event.preventDefault();
+                // self.moveAllTiles(direction);
+
+                // for (let row = 0; row < 4; row++) {
+                //     for (let column = 0; column < 4; column++) {
+                //         if (asd[row][column]) asd[row][column] = row;
+                //     }
+                // }
+
+                // self.setState({ grid: asd });
+                // console.log(self.state.grid);
+
+                self.addRandomTile(2);
+            }
+        })
     }
 
     protected initCellsGrid(): React.ReactChild[][] {
@@ -34,6 +78,9 @@ export class Grid extends React.Component<GridProps> {
         }
     }
 
+    // todo: better way of asigning key to tiles
+    protected tileIteration: number = 0;
+
     protected addRandomTile(value: number): React.ReactChild {
         let emptyCells: LocationOnGrid[] = this.emptyCells();
         let randCellNumber: number = Math.floor(Math.random() * emptyCells.length);
@@ -43,10 +90,18 @@ export class Grid extends React.Component<GridProps> {
         let tileProps: TileProps = {
             position: tilePosition,
             value: value,
+            key: this.tileIteration,
         }
+        this.tileIteration++;
 
-        let newTile = <Tile {...tileProps}/>
-        this.cellsGrid[tilePosition.row][tilePosition.column] = newTile;
+        let newTile = <Tile {...tileProps} />
+        // this.cellsGrid[tilePosition.row][tilePosition.column] = newTile;
+
+        let asd = this.state.grid;
+        asd[tilePosition.row][tilePosition.column] = newTile;
+        this.setState({
+            grid: asd
+        });
 
         return newTile;
     }
@@ -68,13 +123,19 @@ export class Grid extends React.Component<GridProps> {
     }
 
     public getCellTile(cellPosition: LocationOnGrid): React.ReactChild {
-        return this.cellsGrid[cellPosition.row][cellPosition.column];
+        return this.state.grid[cellPosition.row][cellPosition.column];
     }
 
     render() {
         return (
             <div className="tile-container">
-                {this.cellsGrid}
+                {
+                    this.state.grid.map((a) =>
+                        a.map((b) =>
+                            b
+                        )
+                    )
+                }
             </div>
         );
     }
